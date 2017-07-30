@@ -39,6 +39,7 @@ class Field extends React.Component {
         }
       }
     }
+    if (this.props.viewMode) this.props.centerView(this.state.activePuppet.name);
     this.setState({positions: toChange});
   };
 
@@ -49,7 +50,7 @@ class Field extends React.Component {
           {this.state.positions[0].map(p => <Puppet name={p.name} order={p.order} key={p.order} onClick={this.selectPuppet} />)}
         </div>
         {this.state.positions.slice(1, 31).map((step, key) => (
-            <div style={stepStyle} key={key}>
+            <div style={key % 2 === 0 ? evenStyle : stepStyle} key={key}>
               {step.map(p => <Puppet name={p.name} order={p.order} key={p.order} onClick={this.selectPuppet} />)}
             </div>
           )
@@ -62,29 +63,37 @@ class Field extends React.Component {
   }
 }
 
+const puppetSize = 64 + 8 * 2;
+
 const style = {
   display: 'flex',
   flexDirection: 'row',
   outline: 'none',
-}
+};
 
-const startStyle = {
-  minWidth: '80px',
-  borderRight: '1px solid black',
-}
-
-const endStyle = {
-  minWidth: '80px',
-  borderLeft: '1px solid black',
-}
-
-const stepStyle = {
+const columnStyle = {
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'space-around',
+  justifyContent: 'center',
   minWidth: '80px',
+};
+
+const startStyle = Object.assign({
+  borderRight: '1px solid black',
+}, columnStyle);
+
+const endStyle = Object.assign({
+  backgroundColor: 'yellow',
+  borderLeft: '1px solid black',
+}, columnStyle);
+
+const stepStyle = Object.assign({
   borderLeft: '1px solid black',
   borderRight: '1px solid black',
-}
+}, columnStyle);
+
+const evenStyle = Object.assign({
+  backgroundColor : '#EEEEEE',
+}, stepStyle);
 
 export default Field;

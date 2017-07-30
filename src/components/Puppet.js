@@ -3,7 +3,7 @@ import React from 'react';
 class Puppet extends React.Component {
   render() {
     return (
-      <div style={style} title={this.props.name} data-custom-id={this.props.order} onClick={this.props.onClick}>
+      <div style={style} title={this.props.name} id={this.props.name} data-custom-id={this.props.order} onClick={this.props.onClick}>
         {this.props.name}
       </div>
     );
