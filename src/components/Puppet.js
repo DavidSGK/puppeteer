@@ -1,16 +1,9 @@
 import React from 'react';
 
 class Puppet extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      active: false,
-    }
-  }
-
   render() {
     return (
-      <div style={style} title={this.props.name} tabIndex={0}>
+      <div style={style} title={this.props.name} data-custom-id={this.props.order} onClick={this.props.onClick}>
         {this.props.name}
       </div>
     );
